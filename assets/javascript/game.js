@@ -11,6 +11,9 @@ var loseCounter = 0;
 // Number of guesses left
 var guessesLeft = 9;
 
+// Empty array to store incorrect guesses
+var incorrectArr = [];
+
 
 
 // This function is run whenever the user presses a key.
@@ -28,25 +31,32 @@ document.onkeyup = function (event) {
     if (userGuess === computerGuess) {
       //if matches increment winCounter by 1.
       winCounter++;
-      // and resets guessesLeft to 9.
+      // and resets guessesLeft to 9
       guessesLeft = 9;
+      // reset incorrectArr to an empty array;
+      incorrectArr = [];
 
     } else {
       // if values does not match, decrement guessesCounter by one.
       guessesLeft--;
+
+      // and push it to incorrectArr
+      incorrectArr.push(userGuess);
     }
 
-    // when guessesLeft becomes 0, resets guessesLeft to 9 and increment loseCounter by 1.
+    // when guessesLeft becomes 0, resets guessesLeft to 9, and increment loseCounter by 1, and resets incorrectArr to empty array
     if (guessesLeft === 0) {
       guessesLeft = 9;
       loseCounter++;
+      incorrectArr = [];
     }
   
-
+  //console.log to debug
   console.log("Wins: " + winCounter);
   console.log("Loses: " + loseCounter);
   console.log("Guesses left: " + guessesLeft);
 
+  //DOM manipulation
   var winHTML = document.getElementById("wins");
   winHTML.textContent = winCounter;
 
@@ -57,6 +67,6 @@ document.onkeyup = function (event) {
   guessHTML.textContent = guessesLeft;
 
   var incorrectHTML = document.getElementById("incorrect");
-  incorrectHTML.textContent
+  incorrectHTML.textContent = incorrectArr
 
 }
